@@ -366,7 +366,7 @@ LDAP RFCs 4511, 4513, 4515, 4517, 4519, 4510, 4512, 4514, 4516 and 4518.
 
 =head1 AUTHOR
 
-Salvador Fandino, E<lt>sfandino@yahoo.comE<gt>
+Salvador FandiE<ntilde>o, E<lt>sfandino@yahoo.comE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 
