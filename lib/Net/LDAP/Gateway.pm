@@ -162,16 +162,16 @@ C<LDAP_DEREF_ALIASES_ALWAYS> [3]
 
 =item LDAP_OP_MODIFY_REQUEST [6]
 
-  $data = { dn         => $dn,
-            add        => $add,
-            operations => \@ops
+  $data = { dn      => $dn,
+            add     => $add,
+            changes => \@changes
   }
 
-  @ops = ( { operation => $op,
-             attribute => $attribute,
-             values    => \@values },
-           ...
-         )
+  @changes = ( { operation => $op,
+                 attribute => $attribute,
+                 values    => \@values },
+                 ...
+             )
 
 C<$op> can take the values C<LDAP_MODOP_REPLACE>, C<LDAP_MODOP_ADD> or
 C<LDAP_MODOP_DELETE>.
