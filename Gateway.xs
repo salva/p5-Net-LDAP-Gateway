@@ -16,13 +16,8 @@ typedef HV HV_opt;
 
 static SV *
 new_message_sv(void) {
-    SV *sv = newSV(2048);
-    sv_2mortal(sv);
-    SvUPGRADE(sv, SVt_PVIV);
+    SV *sv = sv_2mortal(newSV(2048));
     SvPOK_on(sv);
-    SvFLAGS(sv) |= SVf_OOK;
-    SvPV_set(sv, SvPVX(sv) + RESERVE_HEAD);
-    SvIV_set(sv, RESERVE_HEAD);
     return sv;
 }
 
