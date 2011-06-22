@@ -244,7 +244,7 @@ C<LDAP_MODOP_DELETE>.
 
 =item LDAP_OP_EXTENDED_RESPONSE [24]
 
-  $data = { resylt     => $result_code,
+  $data = { result     => $result_code,
             matched_dn => $dn,
             message    => $message,
             referrals  => \@referrals    # optional
