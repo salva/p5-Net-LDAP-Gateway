@@ -14,7 +14,7 @@ do "t/messages.pl";
 
 plan tests => @$message * 5;
 
-my $unberize = 1;
+my $unberize = 0;
 
 
 sub unber {
@@ -43,6 +43,8 @@ for my $msg (@$message) {
     my $text_op = $msg->{asn1}[0];
     my $packed = $msg->{packed};
 
+#    my $unber1 = unber $packed;
+#    diag "original:\n$unber1\n";
     my @peek = eval { ldap_peek_message($packed) };
     is_deeply(\@peek, [length $packed, $msgid, $op, grep defined, $msg->{peek}],
 	      "peek $text_op $msgid")
@@ -69,6 +71,8 @@ for my $msg (@$message) {
 	};
     diag_error;
     is ($buffer, $rubbish, "rubbish remains $text_op $msgid");
+#    use Data::Dumper;
+#    print Dumper \@unpacked;
     my $repacked = eval { ldap_pack_message_ref(@unpacked) };
     is ($repacked, $packed, "repacked $text_op $msgid")
 	or do {
