@@ -39,7 +39,7 @@ pack_modify_request_ref(SV *dest, HV *hv) {
     offset1 = start_constructed(dest, ASN1_APPLICATION|ASN1_CONSTRUCTED, LDAP_OP_MODIFY_REQUEST);
     pack_string_utf8(dest, hv_fetchs_def_undef(hv, "dn"));
     offset2 = start_sequence(dest);
-    changes = hv_fetchs_def_undef(hv, "operations");
+    changes = hv_fetchs_def_undef(hv, "changes");
     if (changes && SvOK(changes)) {
 	AV *av;
 	I32 i, len;

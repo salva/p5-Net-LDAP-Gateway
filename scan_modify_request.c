@@ -15,7 +15,7 @@ scan_modify_request(const char** src, const char* max, HV *out) {
 	croak("scan_modify_request: packet too short");
 
     changes = newAV();
-    hv_stores(out, "operations", newRV_noinc((SV*)changes));
+    hv_stores(out, "changes", newRV_noinc((SV*)changes));
 
     while (*src <  max) {
 	const char *operation_max;
