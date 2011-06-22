@@ -295,7 +295,7 @@ L<Net::LDAP::Gateway::Constant/Error codes>).
 
 =item $msg = ldap_pack_extended_response_ref($msgid, \%data)
 
-These functions take a C<$msgid> and a reference to an array
+These functions take a C<$msgid> and a reference to a hash
 containing the message data and return the LDAP message.
 
 The data structured passed must be as documented on
