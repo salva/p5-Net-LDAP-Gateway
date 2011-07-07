@@ -1,6 +1,6 @@
 package Net::LDAP::Gateway;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 use strict;
 use warnings;
@@ -199,8 +199,7 @@ C<LDAP_MODOP_DELETE>.
 
   $data = { dn        => $dn,
             attribute => $attr,
-            value     => $value
-  }
+            value     => $value }
 
 =item LDAP_OP_ABANDON_REQUEST [16]
 
@@ -211,7 +210,6 @@ C<LDAP_MODOP_DELETE>.
   $data = { oid   => $oid,
             value => $value }
 
-
 =item LDAP_OP_BIND_RESPONSE [1]
 
   $data = { result => $result_code,
@@ -220,7 +218,6 @@ C<LDAP_MODOP_DELETE>.
             referrals => \@referrals,        # optional
             sasl_credentials => $credentials # optional
   }
-
 
 =item LDAP_OP_SEARCH_ENTRY_RESPONSE [5]
 
@@ -303,7 +300,7 @@ C<ldap_shift_message>.
 
 =item $msg = ldap_pack_bind_request($msgid, ...)
 
-=item $msg = ldap_pack_bind_response($msgid, $matched_dn, $message, \@referrals, $SASL_creds)
+=item $msg = ldap_pack_bind_response($msgid, $result, $matched_dn, $message, \@referrals, $SASL_creds)
 
 =item $msg = ldap_pack_unbind_request($msgid)
 
@@ -311,27 +308,27 @@ C<ldap_shift_message>.
 
 =item $msg = ldap_pack_search_entry_response($msgid, $dn, $attr1 => \@values1, $attr2 => \@values2)
 
-=item $msg = ldap_pack_search_done_response($msgid, $matched_dn, $message, \@referrals)
+=item $msg = ldap_pack_search_done_response($msgid, $result, $matched_dn, $message, \@referrals)
 
 =item $msg = ldap_pack_modify_request($msgid, ...)
 
-=item $msg = ldap_pack_modify_response($msgid, $matched_dn, $message, \@referrals)
+=item $msg = ldap_pack_modify_response($msgid, $result, $matched_dn, $message, \@referrals)
 
 =item $msg = ldap_pack_add_request($msgid, ...)
 
-=item $msg = ldap_pack_add_response($msgid, $matched_dn, $message, \@referrals)
+=item $msg = ldap_pack_add_response($msgid, $result, $matched_dn, $message, \@referrals)
 
 =item $msg = ldap_pack_delete_request($msgid, ...)
 
-=item $msg = ldap_pack_delete_response($msgid, $matched_dn, $message, \@referrals)
+=item $msg = ldap_pack_delete_response($msgid, $result, $matched_dn, $message, \@referrals)
 
 =item $msg = ldap_pack_modify_dn_request($msgid, ...)
 
-=item $msg = ldap_pack_modify_dn_response($msgid, $matched_dn, $message, \@referrals)
+=item $msg = ldap_pack_modify_dn_response($msgid, $result, $matched_dn, $message, \@referrals)
 
 =item $msg = ldap_pack_compare_request($msgid, ...)
 
-=item $msg = ldap_pack_compare_response($msgid, $matched_dn, $message, \@referrals)
+=item $msg = ldap_pack_compare_response($msgid, $result, $matched_dn, $message, \@referrals)
 
 =item $msg = ldap_pack_abandon_request($msgid, ...)
 
@@ -341,7 +338,6 @@ C<ldap_shift_message>.
 
 These functions take a C<$msgid> and a list of arguments and return
 the corresponding LDAP message.
-
 
 =back
 
@@ -370,7 +366,7 @@ Salvador FandiE<ntilde>o, E<lt>sfandino@yahoo.comE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright (C) 2009 by Qindel Formacion y Servicios S.L.
+Copyright (C) 2009, 2010, 2011 by Qindel Formacion y Servicios S.L.
 
 This Perl module is free software: you can redistribute it and/or
 modify it under the terms of the GNU General Public License as
