@@ -1,7 +1,8 @@
 Revision history for Perl extension Net::LDAP::Gateway.
 
-0.03
-        - packing of substrings filters was broken
+0.03  Aug 31, 2011
+        - packing of substring filters was broken (bug reported by
+          Rafael Porres)
 
 0.02  Jul 11, 2011
 
