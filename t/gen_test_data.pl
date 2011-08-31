@@ -109,7 +109,7 @@ my @message = ( { asn1 => [ bindRequest => { version        => 3,
 					     }
 			  ],
 		  perl => [ LDAP_OP_MODIFY_REQUEST, { dn => ('cn=paco,o=bar' x 500),
-						      operations =>
+						      changes =>
 						      [ { operation => LDAP_MODOP_REPLACE,
 							  attribute => 'foo',
 							  values => ['hello']
@@ -146,7 +146,7 @@ my @message = ( { asn1 => [ bindRequest => { version        => 3,
 					     }
 			  ],
 		  perl => [ LDAP_OP_MODIFY_REQUEST, { dn => 'cn=paco,o=bar',
-						     operations =>
+						     changes =>
 						     [ { operation => LDAP_MODOP_REPLACE,
 							 attribute => 'foo',
 							 values => [ 'hello' ],
@@ -291,9 +291,27 @@ my @message = ( { asn1 => [ bindRequest => { version        => 3,
 			      message => 'Tiriron',
 			      referrals => [ 'quo', 'vadis' ],
 			      name => 'my name',
-			      value => ('my value' x 1000)} ],
+			      value => ('my value' x 1000) } ],
 		  peek => LDAP_TIME_LIMIT_EXCEEDED
 		},
+                { asn1 => [ searchRequest => { timeLimit => 0,
+                                               baseObject => 'ou=hola',
+                                               filter => { substrings => { substrings => [ { initial => '3118' } ],
+                                                                           type => 'vfsid'
+                                                                         } },
+                                               sizeLimit => 0,
+                                               typesOnly => 0,
+                                               derefAliases => 0,
+                                               attributes => [],
+                                               scope => 2
+                                             }, ],
+		  perl => [ LDAP_OP_SEARCH_REQUEST, { base_dn       => 'ou=hola',
+						      filter        => [ LDAP_FILTER_SUBSTRINGS, 'vfsid', 3118, undef ],
+						      deref_aliases => LDAP_DEREF_ALIASES_NEVER,
+                                                      scope         => LDAP_SCOPE_WHOLE_SUBTREE } ],
+		  peek => 'ou=hola',
+                },
+
 		# TODO:
 		# - intermediate response tests
 	      );
@@ -336,8 +354,8 @@ for my $req (@message) {
 
     my @c = grep int(rand 1.5), @control;
     if (@c) {
-	push @$asn1, controls => [map $_->{asn1}, @c];
-	push @$perl, [map $_->{perl}, @c];
+        push @$asn1, controls => [map $_->{asn1}, @c];
+        push @$perl, [map $_->{perl}, @c];
     }
 
     my $packed = $packer->encode(@$asn1, messageID => $msgid);
