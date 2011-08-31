@@ -1,6 +1,6 @@
 package Net::LDAP::Gateway;
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 use strict;
 use warnings;
