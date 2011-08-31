@@ -60,10 +60,11 @@ pack_search_filter(SV *dest, AV *filter) {
 	    {
 		I32 i;
 		SV **attr = av_fetch(filter, 1, 0);
-		STRLEN offset = start_sequence(dest);
+		STRLEN offset;
 		if (!attr || !*attr || len < 4)
 		    croak(EHEAD "[LDAP_FILTER_SUBSTRINGS, $attribute, $start, @middle, $end]");
-		
+                pack_string_utf8(dest, *attr);
+                offset = start_sequence(dest);
 		for (i = 2; i < len; i++) {
 		    int stype;
 		    SV **str = av_fetch(filter, i, 0);
