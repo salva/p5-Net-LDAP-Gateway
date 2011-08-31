@@ -77,6 +77,7 @@ pack_search_filter(SV *dest, AV *filter) {
 		    pack_raw_utf8(dest, ASN1_CONTEXT_SPECIFIC|ASN1_PRIMITIVE, stype, *str);
 		}
 		end_sequence(dest, offset);
+                break;
 	    }
 	    default:
 		croak("bad filter type %d", (int)type);
